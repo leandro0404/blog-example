@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ConsoleApp6.Adapters;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Pottencial.Channels.Portals.Authorization.Shared.Models.Pagination;
 
 namespace ConsoleApp6
@@ -11,6 +12,7 @@ namespace ConsoleApp6
         static async Task Main(string[] args)
         {
             var pageSettings = new PageSettings() { };
+            pageSettings.PageSize = 2;
             pageSettings.Direction = Direction.DESC;
 
 
@@ -20,17 +22,18 @@ namespace ConsoleApp6
 
             // meu use case recebe esse repositorio e faz o adapter
             var service = serviceProvider.GetService<IBlogRepository>();
+            // meu use case recebe injecao do adapter
+            var adapter = serviceProvider.GetService<IBlogAdapter>();
 
             // busca dados do repo
             var blogs = await service.Get(pageSettings);
 
-            //converte
-            var adapter = new BlogAdapter();
-
-            //retorna
+            //converte - retorna
             var result = adapter.ToPageResultBlog(blogs);
 
-            Console.WriteLine("Hello World!");
+
+            Console.WriteLine("Print dados");
+            Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
         }
     }
 }

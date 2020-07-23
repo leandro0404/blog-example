@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ConsoleApp6.Adapters;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
@@ -16,6 +17,8 @@ namespace ConsoleApp6
             .AddJsonFile("app-settings.json", false)
             .Build();
             services.AddSingleton(configuration);
+
+            services.AddScoped<IBlogAdapter,BlogAdapter>();
 
             services.AddHttpClient<IBlogRepository, BlogRepository>(client =>
             {

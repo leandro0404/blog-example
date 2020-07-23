@@ -5,7 +5,7 @@ using Pottencial.Channels.Portals.Authorization.Shared.Models.Pagination;
 
 namespace ConsoleApp6.Adapters
 {
-    public class BlogAdapter
+    public class BlogAdapter : IBlogAdapter
     {
         public Blog ToBlog(BlogEntity blogEntity)
         {
