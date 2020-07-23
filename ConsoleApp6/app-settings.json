@@ -1,0 +1,5 @@
+﻿{
+  "Configuration": {
+    "URL_API": "https://blog.pottencial.com.br/wp-json/wp/v2/"
+  }
+}
