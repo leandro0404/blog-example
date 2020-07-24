@@ -29,11 +29,12 @@ namespace ConsoleApp6
 
         public async Task<PagedResult<Blog>> Get(PageSettings pageSettings)
         {
+            var offset = ((pageSettings.PageNumber - 1) * pageSettings.PageSize) -1;
             var url = $"posts?" +
                 $"categories=19" +
                 $"&page={pageSettings.PageNumber}" +
                 $"&per_page={pageSettings.PageSize}" +
-                $"&offset=0" +
+                $"&offset={offset}" +
                 $"&order={pageSettings.Direction.ToString().ToLower()}" +
                 $"&orderby={pageSettings.OrderBy}";
 

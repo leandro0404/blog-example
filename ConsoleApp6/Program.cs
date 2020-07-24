@@ -12,6 +12,8 @@ namespace ConsoleApp6
         static async Task Main(string[] args)
         {
             var pageSettings = new PageSettings() { };
+
+            pageSettings.PageNumber = 22;
             pageSettings.Direction = Direction.DESC;
             pageSettings.OrderBy = "date";
 
