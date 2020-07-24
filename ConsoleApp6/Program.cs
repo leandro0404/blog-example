@@ -12,28 +12,21 @@ namespace ConsoleApp6
         static async Task Main(string[] args)
         {
             var pageSettings = new PageSettings() { };
-            pageSettings.PageSize = 2;
             pageSettings.Direction = Direction.DESC;
-
+            pageSettings.OrderBy = "date";
 
             IServiceCollection services = new ServiceCollection();
             services.ConfigureServices();
             var serviceProvider = services.BuildServiceProvider();
 
             // meu use case recebe esse repositorio e faz o adapter
-            var service = serviceProvider.GetService<IBlogRepository>();
-            // meu use case recebe injecao do adapter
-            var adapter = serviceProvider.GetService<IBlogAdapter>();
+            var service = serviceProvider.GetService<IBlogRepository>();           
 
             // busca dados do repo
             var blogs = await service.Get(pageSettings);
 
-            //converte - retorna
-            var result = adapter.ToPageResultBlog(blogs);
-
-
             Console.WriteLine("Print dados");
-            Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
+            Console.WriteLine(JsonConvert.SerializeObject(blogs, Formatting.Indented));
         }
     }
 }
